@@ -43,7 +43,7 @@ const ThankYouPage = () => {
       )}
 
       {/* ✅ Continue Shopping Button */}
-      <Link href="/shop">
+      <Link href="/">
         <button className="mt-6 px-6 py-3 bg-[#FFEC47] text-black font-semibold text-lg rounded-lg shadow-md hover:bg-[#FFD700] transition-all duration-300">
           Continue Shopping
         </button>
