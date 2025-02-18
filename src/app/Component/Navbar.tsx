@@ -63,20 +63,30 @@ function NavIcons() {
           <span className="sr-only">Account</span>
         </button>
       </Link>
-      <button className="p-2 text-black">
-        <Search className="h-5 w-5" />
-        <span className="sr-only">Search</span>
-      </button>
-      <button className="p-2 text-black">
-        <Heart className="h-5 w-5" />
-        <span className="sr-only">Wishlist</span>
-      </button>
+      
+      {/* Redirect Search Icon to Cards Page */}
+      <Link href="/Cards">
+        <button className="p-2 text-black">
+          <Search className="h-5 w-5" />
+          <span className="sr-only">Search</span>
+        </button>
+      </Link>
+      
+      {/* Redirect Wishlist Icon to Wishlist Page */}
+      <Link href="/wishlist">
+        <button className="p-2 text-black">
+          <Heart className="h-5 w-5" />
+          <span className="sr-only">Wishlist</span>
+        </button>
+      </Link>
+
       <Link href="/Cart">
         <button className="p-2 text-black">
           <ShoppingCart className="h-5 w-5" />
           <span className="sr-only">Cart</span>
         </button>
       </Link>
+
     </>
   );
 }
