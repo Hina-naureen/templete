@@ -40,7 +40,9 @@ export default function Cart() {
 
   // Function to calculate total price dynamically
   const updateTotalPrice = (updatedCart: Product[]) => {
+    // Calculate total price
     const total = updatedCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    console.log("Calculated Total Price: ", total); // Debugging line
     setTotalPrice(total);
   };
 
