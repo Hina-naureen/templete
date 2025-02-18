@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+
 import Link from "next/link";
 
 const ThankYouPage = () => {
-  const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
 
   useEffect(() => {
