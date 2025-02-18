@@ -29,7 +29,7 @@ const FilterPage = () => {
         {/* Left Side: Arrow Icon */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Image
-            src="/arrow.png" // Arrow icon ka path
+            src="/Vector (4).png" // Arrow icon ka path
             alt="Arrow Icon" // Alt text
             width={25} // Image ki width 25px
             height={25} // Image ki height 25px
@@ -46,7 +46,7 @@ const FilterPage = () => {
         
         <div>
           <Image
-            src="/Vector (1).png" // Grid icon ka path
+            src="/dodt.png" // Grid icon ka path
             alt="Grid Icon" // Alt text
             width={28} // Image ki width 28px
             height={28} // Image ki height 28px
@@ -57,7 +57,7 @@ const FilterPage = () => {
         {/* List Icon */}
         <div>
           <Image
-            src="/bi_view-list (1).png" // List icon ka path
+            src="/line.png" // List icon ka path
             alt="List Icon" // Alt text
             width={24} // Image ki width 24px
             height={24} // Image ki height 24px
