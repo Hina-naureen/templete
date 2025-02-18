@@ -95,13 +95,13 @@ export default function Cart() {
       </div>
 
       {/* 🔹 Cart Layout */}
-      <div className="relative flex flex-col md:flex-row mt-[100px] mx-auto w-full lg:w-[1440px] gap-8">
+      <div className="relative flex flex-col md:flex-row mt-[100px] mx-auto w-[85%] lg:w-[1440px] gap-8">
         
         {/* 🛒 Cart Items Section */}
         <div className="bg-[#FFF9E5] w-full md:w-[65%] border border-[#9F9F9F] rounded-md p-6 shadow-lg">
           
           {/* 🔹 Table Headers */}
-          <div className="grid grid-cols-5 gap-4 items-center text-center text-black font-semibold text-lg border-b pb-2 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center text-center text-black font-semibold text-lg border-b pb-2 mb-4">
             <span>Product</span>
             <span>Price</span>
             <span>Quantity</span>
@@ -116,19 +116,19 @@ export default function Cart() {
               {cart.map((item) => (
                 <div
                   key={item.id}
-                  className="grid grid-cols-5 items-center text-center border-b border-gray-300 pb-4 last:border-0"
+                  className="grid grid-cols-1 md:grid-cols-5 items-center text-center border-b border-gray-300 pb-4 last:border-0"
                 >
                   {/* Product Image & Name */}
                   <div className="flex items-center gap-4">
                     <Image src={item.image} alt={item.name} width={60} height={60} className="rounded-md" />
-                    <span className="text-black font-medium">{item.name}</span>
+                    <span className="text-black font-medium text-sm sm:text-base">{item.name}</span>
                   </div>
 
                   {/* Price */}
-                  <span className="text-black font-medium">Rs. {item.price.toLocaleString()}</span>
+                  <span className="text-black font-medium text-sm sm:text-base md:col-span-1">{`Rs. ${item.price.toLocaleString()}`}</span>
 
                   {/* Quantity Controls */}
-                  <div className="flex items-center justify-center gap-3">
+                  <div className="flex items-center justify-center gap-3 col-span-2 md:col-span-1">
                     <button
                       onClick={() => updateQuantity(item.id, -1)}
                       className="w-8 h-8 flex items-center justify-center bg-white border border-[#9F9F9F] rounded-md hover:bg-gray-200"
@@ -145,12 +145,12 @@ export default function Cart() {
                   </div>
 
                   {/* Subtotal */}
-                  <span className="text-black font-medium">
-                    Rs. {(item.price * item.quantity).toLocaleString()}
+                  <span className="text-black font-medium text-sm sm:text-base md:col-span-1">
+                    {`Rs. ${(item.price * item.quantity).toLocaleString()}`}
                   </span>
 
                   {/* Remove Button */}
-                  <button onClick={() => removeFromCart(item.id)} className="text-red-600 hover:underline">
+                  <button onClick={() => removeFromCart(item.id)} className="text-red-600 hover:underline text-sm sm:text-base">
                     Remove
                   </button>
                 </div>
