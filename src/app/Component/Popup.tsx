@@ -144,7 +144,7 @@ const Popup = () => {
           className="text-gray-600 text-sm mt-2 cursor-pointer hover:underline"
           onClick={handleClose}
         >
-          ```tsx
+          ```TSX
                     No
         </p>
       </motion.div>
