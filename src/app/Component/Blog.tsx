@@ -39,13 +39,14 @@ const HomePage: React.FC = () => {
                     {[1, 2, 3].map((item, index) => (
                         <div key={index} className="flex flex-col items-center">
                             <div className="rounded-lg shadow-md w-full max-w-xs">
-                                <Image 
-                                    src={`/Going all-with milenial design${item}.png`} 
-                                    alt={`Blog Image ${item}`} 
-                                    width={320} 
-                                    height={240} 
-                                    className="w-full h-60 object-cover rounded-lg"
-                                />
+                            <Image 
+    src={index === 0 ? "/Rectangle 13 (1).png" : `/Going all-with milenial design${item}.png`} 
+    alt={`Blog Image ${item}`} 
+    width={320} 
+    height={240} 
+    className="w-full h-60 object-cover rounded-lg"
+/>
+
                             </div>
                             <div className="mt-4 text-center">
                                 <h3 className="text-xl font-semibold mb-2">Going all-in with millennial design</h3>
@@ -72,24 +73,29 @@ const HomePage: React.FC = () => {
                 </div>
                 
                 <div className="mt-12 text-center">
-                    <Link href="/blogs" className="text-lg font-semibold text-black hover:underline">
+                    <Link href="/blogs" className=" mt-6 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-semibold rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                         View All
                     </Link>
                 </div>
             </section>
 
             {/* Instagram Section */}
-            <section className="relative w-full h-[450px] bg-cover bg-center" style={{ backgroundImage: "url('/instagram.png')" }}>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-                    <h1 className="text-[24px] md:text-[36px] font-bold text-white">Our Instagram</h1>
-                    <p className="opacity-[0.8] max-w-[600px] text-[16px] md:text-[18px] mt-2 text-white">
-                        Follow our store on Instagram
-                    </p>
-                    <button className="mt-7 px-6 py-3 md:px-[50px] md:py-[20px] rounded-full shadow-2xl bg-[#FAFAFA] text-black font-semibold">
-                        Follow Us
-                    </button>
-                </div>
-            </section>
+            <section className="relative w-full h-[450px]">
+  <div className="absolute inset-0 bg-black/10"></div> {/* یہ اوورلے دے گا */}
+  <div
+    className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
+    style={{ backgroundImage: "url('/instagram.png')", backgroundSize: "cover", backgroundPosition: "center" }}
+  >
+    <h1 className="text-[24px] md:text-[36px] font-bold text-white">Our Instagram</h1>
+    <p className="opacity-[0.9] max-w-[600px] text-[16px] md:text-[18px] mt-2 text-white">
+      Follow our store on Instagram
+    </p>
+    <button className="mt-7 px-6 py-3 md:px-[50px] md:py-[20px] rounded-full shadow-2xl bg-[#FAFAFA] text-black font-semibold">
+      Follow Us
+    </button>
+  </div>
+</section>
+
         </div>
     );
 };
