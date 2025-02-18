@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-const ThankYou = () => {
+const ThankYouPage = () => {
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
 
@@ -53,4 +53,4 @@ const ThankYou = () => {
   );
 };
 
-export default ThankYou;
+export default ThankYouPage;
