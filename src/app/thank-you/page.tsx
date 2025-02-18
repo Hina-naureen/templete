@@ -1,66 +1,56 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { NavBar } from "../Component/Navbar";
-import Footer from "../Component/Footer";
+import Link from "next/link";
 
-const ThankYou = () => {
-  const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
+const ThankYouPage = () => {
   const router = useRouter();
+  const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
 
   useEffect(() => {
-    const method = localStorage.getItem("selectedPaymentMethod");
-    setPaymentMethod(method);
+    const storedPaymentMethod = localStorage.getItem("selectedPaymentMethod");
+    if (storedPaymentMethod) {
+      setPaymentMethod(storedPaymentMethod);
+      localStorage.removeItem("cart"); // Clear cart after order is placed
+    }
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFF9C4]">
-      <NavBar bgColor="bg-white" />
-
-      {/* Thank You Section */}
-      <div className="flex flex-col items-center justify-center flex-grow px-4 py-6">
-        <div className="bg-white shadow-lg rounded-xl p-8 max-w-md w-full mx-auto border border-gray-200 animate-fade-in">
-          
-          {/* Smaller & Lower Frame */}
-          <div className=" w-28 h-28 mx-auto bg-gray-100 rounded-full flex items-center justify-center shadow-md border border-gray-300 overflow-hidden mt-3">
-            <Image
-              src="/tHANK_YOU-removebg-preview.png"
-              alt="Thank You"
-              width={100}
-              height={100}
-              className="animate-float object-contain"
-            />
-          </div>
-
-          {/* Thank You Text */}
-          <h1 className="text-2xl md:text-3xl font-bold mt-4 text-black animate-fade-in-up">
-            Thank You for Your Order!
-          </h1>
-          <p className="text-md mt-1 text-gray-700 animate-fade-in-up delay-200">
-            We truly appreciate your support.
-          </p>
-
-          {paymentMethod && (
-            <p className="text-md font-medium mt-2 text-black animate-fade-in-up delay-300">
-              Payment Method: <span className="font-semibold">{paymentMethod}</span>
-            </p>
-          )}
-
-          {/* Animated Button */}
-          <button
-            onClick={() => router.push("/")}
-            className="mt-4 px-5 py-2 bg-black text-white font-medium rounded-md shadow-md hover:bg-gray-900 transition duration-300 animate-glow"
-          >
-            Continue Shopping
-          </button>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6 text-center">
+      {/* ✅ Animated Checkmark */}
+      <div className="relative mb-6">
+        <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+          <svg className="w-12 h-12 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
         </div>
       </div>
 
-      <Footer />
+      {/* ✅ Thank You Message */}
+      <h1 className="text-3xl font-bold text-gray-800">Thank You for Your Order!</h1>
+      <p className="text-lg text-gray-600 mt-2">
+        Your order has been successfully placed. We appreciate your trust in us.
+      </p>
+
+      {/* ✅ Order Confirmation Details */}
+      {paymentMethod && (
+        <div className="mt-4 p-4 bg-white border rounded-lg shadow-md w-full max-w-md">
+          <p className="text-lg font-semibold text-gray-800">Order Details</p>
+          <p className="text-gray-600 mt-1">Payment Method: <span className="font-medium text-black">{paymentMethod}</span></p>
+          <p className="text-gray-600 mt-1">Estimated Delivery: <span className="font-medium text-black">3-5 Business Days</span></p>
+        </div>
+      )}
+
+      {/* ✅ Continue Shopping Button */}
+      <Link href="/shop">
+        <button className="mt-6 px-6 py-3 bg-[#FFEC47] text-black font-semibold text-lg rounded-lg shadow-md hover:bg-[#FFD700] transition-all duration-300">
+          Continue Shopping
+        </button>
+      </Link>
     </div>
   );
 };
 
-export default ThankYou;
+export default ThankYouPage;
