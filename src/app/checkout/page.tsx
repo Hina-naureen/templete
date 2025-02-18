@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation"; // ✅ Corrected import
+import { useRouter } from "next/navigation"; 
 import Image from "next/image";
 import { NavBar } from "../Component/Navbar";
 import Footer from "../Component/Footer";
@@ -19,16 +19,26 @@ const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  // Fetch cart items from local storage
+  // Fetch cart items from local storage and calculate total price
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
-      const parsedCart = JSON.parse(storedCart);
-      setCartItems(parsedCart);
+      try {
+        const parsedCart: CartItem[] = JSON.parse(storedCart);
 
-      // Calculate total price
-      const total = parsedCart.reduce((sum: number, item: CartItem) => sum + item.price * item.quantity, 0);
-      setTotalPrice(total);
+        // Ensure items have valid price and quantity
+        const validCart = parsedCart.filter(item => item.price && item.quantity);
+
+        setCartItems(validCart);
+
+        // Calculate total price
+        const total = validCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        setTotalPrice(total);
+      } catch (error) {
+        console.error("Error parsing cart data:", error);
+        setCartItems([]);
+        setTotalPrice(0);
+      }
     }
   }, []);
 
@@ -67,6 +77,7 @@ const Checkout = () => {
       {/* 🔹 Checkout Form & Order Summary */}
       <div className="container mx-auto p-4 mt-[90px]">
         <div className="flex flex-col lg:flex-row gap-8">
+          
           {/* Billing Details */}
           <div className="w-full lg:w-2/3 border p-6 bg-white shadow-lg rounded-lg">
             <h2 className="text-xl font-bold mb-4">Billing Details</h2>
@@ -85,36 +96,43 @@ const Checkout = () => {
           {/* Order Summary & Payment */}
           <div className="w-full lg:w-1/3 border p-6 bg-gray-50 shadow-lg rounded-lg">
             <h2 className="text-xl font-bold mb-4">Order Summary</h2>
+
             {cartItems.length === 0 ? (
               <p className="text-gray-500">Your cart is empty.</p>
             ) : (
-              cartItems.map((item, index) => (
-                <div key={index} className="flex justify-between mb-2">
-                  <p>{item.name}</p>
-                  <p>{item.quantity} X</p>
-                  <p>Rs. {item.price.toLocaleString()}</p>
-                </div>
-              ))
+              <div className="space-y-3">
+                {cartItems.map((item, index) => (
+                  <div key={index} className="flex justify-between items-center border-b pb-2">
+                    <p className="text-gray-700 font-medium">{item.name}</p>
+                    <p className="text-gray-600">x {item.quantity}</p>
+                    <p className="font-semibold">Rs. {(item.price * item.quantity).toLocaleString()}</p>
+                  </div>
+                ))}
+              </div>
             )}
-            <div className="flex justify-between mb-2">
-              <p>Subtotal</p>
-              <p className="font-bold">Rs. {totalPrice.toLocaleString()}</p>
-            </div>
-            <div className="flex justify-between mb-2">
-              <p>Total</p>
-              <p className="font-bold text-yellow-600">Rs. {totalPrice.toLocaleString()}</p>
+
+            {/* Subtotal & Total Calculation */}
+            <div className="mt-4 border-t pt-4 space-y-2">
+              <div className="flex justify-between text-lg font-medium">
+                <p>Subtotal:</p>
+                <p>Rs. {totalPrice.toLocaleString()}</p>
+              </div>
+              <div className="flex justify-between text-lg font-bold text-yellow-600">
+                <p>Total:</p>
+                <p>Rs. {totalPrice.toLocaleString()}</p>
+              </div>
             </div>
 
             {/* Payment Methods */}
-            <div className="mt-4">
-              <label className="block">
+            <div className="mt-6 space-y-4">
+              <label className="flex items-center cursor-pointer">
                 <input type="radio" name="payment" className="mr-2" onChange={() => setPaymentMethod("Bank Transfer")} />
                 Direct Bank Transfer
               </label>
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-gray-500">
                 Make your payment directly into our bank account. Your order will not be shipped until funds are cleared.
               </p>
-              <label className="block mt-4">
+              <label className="flex items-center cursor-pointer">
                 <input type="radio" name="payment" className="mr-2" onChange={() => setPaymentMethod("Cash on Delivery")} />
                 Cash on Delivery
               </label>
@@ -122,11 +140,11 @@ const Checkout = () => {
 
             {/* Place Order Button */}
             <button
-  onClick={handlePlaceOrder}
-  className="w-full py-3 mt-4 text-lg font-semibold text-black bg-[#FFEC47] hover:bg-[#FFD700] rounded-lg shadow-md transition-all duration-300 transform hover:scale-[1.05] border border-[#E6C200]"
->
-  Place Order
-</button>
+              onClick={handlePlaceOrder}
+              className="w-full py-3 mt-6 text-lg font-semibold text-black bg-[#FFEC47] hover:bg-[#FFD700] rounded-lg shadow-md transition-all duration-300 transform hover:scale-105 border border-[#E6C200]"
+            >
+              Place Order
+            </button>
           </div>
         </div>
       </div>
