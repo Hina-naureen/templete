@@ -95,7 +95,7 @@ export default function Cart() {
       </div>
 
       {/* 🔹 Cart Layout */}
-      <div className="relative flex flex-col md:flex-row mt-[100px] mx-auto w-[85%] lg:w-[1440px] gap-8">
+      <div className="relative flex flex-col md:flex-row mt-[100px] mx-auto w-full lg:w-[1440px] gap-8">
         
         {/* 🛒 Cart Items Section */}
         <div className="bg-[#FFF9E5] w-full md:w-[65%] border border-[#9F9F9F] rounded-md p-6 shadow-lg">
