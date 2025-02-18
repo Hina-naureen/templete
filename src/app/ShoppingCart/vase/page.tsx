@@ -32,7 +32,7 @@ const Vase = () => {
       <div className="absolute top-[295px] left-1/2 transform -translate-x-1/2 flex text-lg font-medium text-black">
           <span>Home</span>
           <span className="mx-2">➤</span>
-          <span className="font-light">Checkout</span>
+          <span className="font-light">Shop</span>
         </div>
       
           
